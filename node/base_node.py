@@ -38,8 +38,8 @@ class BaseNode(Thread):
         self._context = context
         self._logger = self._context.logger
 
-        self._id = self._node_info.get("id")
-        self._name = self._node_info.get("name")
+        self._node_id = self._node_info.get("id")
+        self._node_name = self._node_info.get("name")
         self._type = self._node_info.get("type")
         self._config = self._node_info.get("config", [])
 
@@ -57,7 +57,7 @@ class BaseNode(Thread):
 
     @property
     def id(self):
-        return self._id
+        return self._node_id
 
     @property
     def context(self):

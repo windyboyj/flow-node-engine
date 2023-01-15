@@ -1,4 +1,7 @@
 from typing import Optional
+
+import cv2
+
 from component.component import TransformComponent
 from context import Context
 from data.data import TransformOutputData, TransformInputData
@@ -14,7 +17,8 @@ class AlgorithmOne(TransformComponent):
     def execute(self, data: Optional[TransformInputData] = None) -> Optional[TransformOutputData]:
         frame = data.frame
         result = ["AlgorithmOne"]
-        # print(1)
+        text = "AlgorithmOne: frame_id:" + str(data.frame_id)
+        cv2.putText(frame, text, (100, 100), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
         return TransformOutputData(frame=frame, text=result)
 
     def terminate(self):

@@ -4,7 +4,7 @@
     "id": "source_node_1",
     "type": "VideoSource",
     "config": {
-      "videoUrl": "D://V90420-095649.mp4"
+      "videoUrl": "test.mp4"
     }
   },
   "transforms": [

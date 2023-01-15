@@ -1,3 +1,5 @@
+import copy
+
 from common import ExitNodeException
 from component.component import ComponentFactory, TransformComponent
 from context import Context
@@ -19,7 +21,7 @@ class TransformNode(BaseNode, NodeSubject, NodeObserver):
 
     def update(self, data: BaseData):
         with self._lock:
-            self.pre_data = data
+            self.pre_data = copy.deepcopy(data)
             self.resume()
 
     def run(self) -> None:

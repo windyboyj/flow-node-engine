@@ -22,8 +22,11 @@ def display_exception():
 
 def get_logger(name="main"):
     import logging.handlers
-    size = 10 * 1024 * 1024
-    handler = logging.handlers.RotatingFileHandler('app.log', 'a', size, 3)
+    handler = logging.StreamHandler()
+    log_format = logging.Formatter(fmt="%(asctime)s %(filename)s %(levelname)s %(message)s",
+                                   datefmt="%Y/%m/%d %X")
+
+    handler.setFormatter(log_format)
     logger = logging.getLogger(name)
     logger.addHandler(handler)
     logger.setLevel(logging.INFO)

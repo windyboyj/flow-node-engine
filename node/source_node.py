@@ -31,7 +31,3 @@ class SourceNode(BaseNode, NodeSubject):
             except Exception as e:
                 self.logger.exception(e)
         self.release()
-
-
-if __name__ == '__main__':
-    b = {}

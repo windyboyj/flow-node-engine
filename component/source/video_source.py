@@ -2,19 +2,18 @@ from typing import Optional
 
 import cv2
 import numpy as np
-
 from common import ExitNodeException
 from component.component import SourceComponent
 from context import Context
-from data.data import BaseData, TransformInputData
+from data.data import BaseData
 
 
 class VideoSource(SourceComponent):
 
     def __init__(self, config: dict, context: Context):
         super().__init__(config, context)
-        url = self.config.get("videoUrl")
-        self.cap = cv2.VideoCapture(url)
+        self.url = self.config.get("videoUrl")
+        self.cap = cv2.VideoCapture(self.url)
 
     def initialize(self):
         pass

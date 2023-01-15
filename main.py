@@ -24,15 +24,14 @@ class TaskRunner(object):
     def start(self):
         try:
             self.init_nodes()
-            print(self.source_node, self.transform_nodes, self.sink_nodes)
             self.start_nodes()
             while self.running:
                 if self.source_node.is_alive() is False:
                     break
-                self.event.wait(timeout=2)
+                time.sleep(2)
 
         except Exception as e:
-            print(e)
+            self.context.logger.exception(e)
         self.exit_nodes()
 
     def exit_nodes(self):
