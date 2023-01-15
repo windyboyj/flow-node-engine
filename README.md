@@ -10,3 +10,8 @@ NodeFlowEngine节点流处理引擎：
 
 
 ![img_1](https://user-images.githubusercontent.com/35550265/212549444-13e06a0c-ed7f-4718-8a68-6642bd49c43f.png)
+
+设计观察者模式，由子节点向父节点进行注册，当父节点有数据更新时，notify 所有子节点进行数据 update，并且利用小颗粒同步锁，保持数据更新的一致性。
+
+
+
