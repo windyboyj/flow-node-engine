@@ -1,0 +1,40 @@
+{
+  "taskId": "task1",
+  "source": {
+    "id": "source_node_1",
+    "type": "VideoSource",
+    "config": {
+      "videoUrl": "D://V90420-095649.mp4"
+    }
+  },
+  "transforms": [
+    {
+      "id": "trans_node_1",
+      "parent": "source_node_1",
+      "type": "AlgorithmOne",
+      "config": {
+        "videoUrl": ""
+      }
+    },
+    {
+      "id": "trans_node_2",
+      "parent": "source_node_1",
+      "type": "AlgorithmTwo",
+      "config": {
+        "videoUrl": ""
+      }
+    }
+  ],
+  "sinks": [
+    {
+      "id": "sink_node_1",
+      "parent": "trans_node_1",
+      "type": "LogSink"
+    },
+    {
+      "id": "sink_node_2",
+      "parent": "trans_node_2",
+      "type": "ShowSink"
+    }
+  ]
+}
