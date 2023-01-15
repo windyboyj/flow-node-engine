@@ -9,5 +9,4 @@ NodeFlowEngine节点流处理引擎：
 每个节点均以线程方式运行，由数据驱动，切换节点的运行状态，数据的流向为父节点->子节点
 
 
-![Image](https://github.com/windyboyj/flow_node/blob/main/blob-image/img_1.png)
-
+![img_1](https://user-images.githubusercontent.com/35550265/212549444-13e06a0c-ed7f-4718-8a68-6642bd49c43f.png)
