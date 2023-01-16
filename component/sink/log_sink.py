@@ -1,7 +1,7 @@
 from typing import Optional
 from component.component import SinkComponent
 from context import Context
-from data.data import TransformOutputData
+from entity.data import TransformOutputData
 
 
 class LogSink(SinkComponent):
@@ -18,11 +18,3 @@ class LogSink(SinkComponent):
 
     def terminate(self):
         pass
-
-
-if __name__ == '__main__':
-    a = {"a": "a"}
-    b = a.copy()
-    c = a.copy()
-    c["a"] = "b"
-    print(a, b, c)

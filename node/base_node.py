@@ -2,10 +2,9 @@ import threading
 from abc import ABC, abstractmethod
 from threading import Thread
 from typing import Optional
-
 from component.component import BaseComponent
 from context import Context
-from data.data import BaseData
+from entity.data import BaseData
 
 
 class NodeSubject(object):
@@ -25,8 +24,14 @@ class NodeSubject(object):
             node.update(data)
 
 
-class NodeObserver(ABC):
+class Observer(ABC):
     @abstractmethod
+    def update(self, data: BaseData):
+        pass
+
+
+class NodeObserver(Observer):
+
     def update(self, data: BaseData):
         pass
 
@@ -39,7 +44,6 @@ class BaseNode(Thread):
         self._logger = self._context.logger
 
         self._node_id = self._node_info.get("id")
-        self._node_name = self._node_info.get("name")
         self._type = self._node_info.get("type")
         self._config = self._node_info.get("config", [])
 
@@ -84,6 +88,8 @@ class BaseNode(Thread):
 
     def exit(self):
         self.running = False
+        self.resume()
+        self.logger.info("%s starting exit", self._node_id)
 
     def get_data(self):
         with self.lock:
@@ -91,3 +97,4 @@ class BaseNode(Thread):
 
     def release(self):
         self.component.terminate()
+        self.logger.info("%s terminate success", self._node_id)

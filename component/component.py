@@ -1,10 +1,8 @@
 import abc
-from typing import Optional, Union
-
 import numpy as np
-
+from typing import Optional, Union
 from context import Context
-from data.data import BaseData, TransformOutputData
+from entity.data import BaseData, TransformOutputData
 
 
 class ComponentFactory(object):

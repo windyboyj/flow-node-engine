@@ -1,10 +1,8 @@
-from typing import Optional
-
 import cv2
-
+from typing import Optional
 from component.component import TransformComponent
 from context import Context
-from data.data import TransformOutputData, TransformInputData
+from entity.data import TransformOutputData, TransformInputData
 
 
 class AlgorithmOne(TransformComponent):

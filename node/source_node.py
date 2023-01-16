@@ -1,7 +1,7 @@
 from common import ExitNodeException
 from component.component import ComponentFactory, SourceComponent
 from context import Context
-from data.data import TransformInputData
+from entity.data import TransformInputData
 from node.base_node import BaseNode, NodeSubject
 
 

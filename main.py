@@ -2,7 +2,6 @@ import json
 import threading
 import time
 from typing import Optional, List
-
 from context import Context
 from node.sink_node import SinkNode
 from node.source_node import SourceNode
@@ -19,7 +18,7 @@ class TaskRunner(object):
         self.source_node: Optional[SourceNode] = None
         self.transform_nodes: Optional[List[TransformNode]] = []
         self.transform_nodes_map: dict = {}
-        self.sink_nodes = []
+        self.sink_nodes: Optional[List[SinkNode]] = []
 
     def start(self):
         try:
@@ -28,25 +27,17 @@ class TaskRunner(object):
             while self.running:
                 if self.source_node.is_alive() is False:
                     break
-                time.sleep(2)
+                time.sleep(1.5)
 
         except Exception as e:
             self.context.logger.exception(e)
-        self.exit_nodes()
 
-    def exit_nodes(self):
-        self.source_node.exit()
+        exit_thread = threading.Thread(target=self.exit_nodes)
+        exit_thread.setDaemon(True)
+        exit_thread.start()
 
-    def start_nodes(self):
-        self.source_node.setDaemon(True)
-        self.source_node.start()
-        for node in self.transform_nodes:
-            node.setDaemon(True)
-            node.start()
-
-        for node in self.sink_nodes:
-            node.setDaemon(True)
-            node.start()
+        time.sleep(1.5)
+        self.context.logger.info("task end success")
 
     def init_nodes(self):
         self.init_source_node()
@@ -76,6 +67,29 @@ class TaskRunner(object):
                 sink_node = SinkNode(sink, self.context)
                 self.sink_nodes.append(sink_node)
                 parent_node.register_node(sink_node)
+
+    def start_nodes(self):
+        self.source_node.setDaemon(True)
+        self.source_node.start()
+        for node in self.transform_nodes:
+            node.setDaemon(True)
+            node.start()
+
+        for node in self.sink_nodes:
+            node.setDaemon(True)
+            node.start()
+
+    def exit_nodes(self):
+        if self.source_node.is_alive():
+            self.source_node.exit()
+
+        for node in self.transform_nodes:
+            if node.is_alive():
+                node.exit()
+
+        for node in self.sink_nodes:
+            if node.is_alive():
+                node.exit()
 
 
 if __name__ == '__main__':

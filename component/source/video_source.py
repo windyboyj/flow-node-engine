@@ -1,11 +1,10 @@
-from typing import Optional
-
 import cv2
 import numpy as np
+from typing import Optional
 from common import ExitNodeException
 from component.component import SourceComponent
 from context import Context
-from data.data import BaseData
+from entity.data import BaseData
 
 
 class VideoSource(SourceComponent):

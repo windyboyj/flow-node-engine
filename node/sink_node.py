@@ -3,7 +3,7 @@ import copy
 from common import ExitNodeException
 from component.component import SinkComponent, ComponentFactory
 from context import Context
-from data.data import BaseData
+from entity.data import BaseData
 from node.base_node import BaseNode, NodeObserver
 
 
@@ -16,16 +16,17 @@ class SinkNode(BaseNode, NodeObserver):
         self.component.initialize()
 
     def update(self, data: BaseData):
-        with self._lock:
+        with self.lock:
             self.pre_data = copy.deepcopy(data)
             self.resume()
 
     def run(self) -> None:
+        self.suspend()
         while self.running:
             try:
-                self.suspend()
                 self.get_data()
                 self.component.execute(self.current_data)
+                self.suspend()
             except ExitNodeException as e:
                 self.logger.exception(e)
                 self.exit()
