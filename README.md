@@ -23,6 +23,9 @@ SinkNode：       负责将处理后的数据进行输出，比如打印，视�
 ![img_1](https://user-images.githubusercontent.com/35550265/212549444-13e06a0c-ed7f-4718-8a68-6642bd49c43f.png)
 
 
+样例程序入口main.py 
+
+任务配置结构体task.json 分为source transforms sinks三部分
 
 
 
